@@ -1,18 +1,33 @@
 /* Assureit mobile polish - loaded at runtime by the app (MOBILE only).
    Safe to edit + commit; the app picks it up on next open. No rebuild needed. */
 
-/* The site's Montserrat is Latin-only, so Hebrew fell back to the device font
-   (looked different on Android). Heebo covers Hebrew and pairs with Montserrat. */
+/* Hebrew webfont (the site's Montserrat is Latin-only). */
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap');
 body, .card, .btn, input, select, textarea,
 h1, h2, h3, h4, h5, h6, .card-title {
   font-family: 'Heebo', Helvetica, Arial, sans-serif !important;
 }
 
-/* Filter buttons: wrap with spacing and leave a gap before the next section */
+/* Filter buttons spacing + gap before the next section */
 form .btn, .btn-group .btn { margin-bottom: 6px !important; }
 form { margin-bottom: 18px !important; }
 .card-title { margin-top: 6px !important; }
 
-/* Long chart legends: show up to ~10 rows, scroll beyond */
+/* Long chart legends: cap height, scroll beyond */
 .apexcharts-legend { max-height: 240px; overflow-y: auto !important; }
+
+/* Header: truncate a long client name so it never breaks the top bar */
+.header-navbar .btn-flat-primary.dropdown-toggle {
+  max-width: 42vw !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Auth pages (login / register / forgot / 2FA): drop the big side illustration
+   on phones, tighten spacing, and keep the submit button clear of the bottom bar. */
+.img-fluid.img-gif { display: none !important; }
+.auth-wrapper .col-lg-3 { display: none !important; }
+.auth-wrapper .auth-inner { align-items: flex-start !important; min-height: auto !important; }
+.auth-wrapper .col-lg-9 { padding: 16px !important; max-width: 100% !important; flex: 0 0 100% !important; }
+.auth-wrapper { padding-bottom: 90px !important; }
