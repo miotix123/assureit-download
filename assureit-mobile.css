@@ -9,11 +9,9 @@ body *:not(i):not(svg):not([class*="flag-icon"]):not([class*="feather"]):not([cl
   font-family: 'Heebo', 'Segoe UI', Helvetica, Arial, sans-serif !important;
 }
 
-/* Auth pages (login / register / forgot / 2FA): the illustration column always
-   carries .d-lg-flex; the form column carries .d-flex. Hide the illustration
-   whatever its width, and let the form fill the screen. Removes the big image
-   and the empty gap on every auth page. */
-.auth-cover .img-fluid.img-gif { display: none !important; }
+/* Auth pages (login / register / forgot / 2FA): hide the illustration column
+   and let the form fill the screen. Removes the big image and the empty gap. */
+.auth-cover .img-gif { display: none !important; }
 .auth-cover [class*="col-lg-"].d-lg-flex { display: none !important; }
 .auth-cover [class*="col-lg-"].d-flex { flex: 0 0 100% !important; max-width: 100% !important; }
 .auth-wrapper .auth-inner { align-items: flex-start !important; min-height: auto !important; }
@@ -21,8 +19,7 @@ body *:not(i):not(svg):not([class*="flag-icon"]):not([class*="feather"]):not([cl
 
 /* Auth pages: the brand logo is absolutely positioned (desktop layout), so on
    mobile it landed ON TOP of the welcome heading. Put it back in normal flow on
-   its own centered line with a small gap, so the order reads:
-   logo -> small space -> heading/description -> form. */
+   its own centered line with a small gap. */
 .auth-cover .brand-logo {
   position: static !important;
   width: 100% !important;
@@ -32,14 +29,19 @@ body *:not(i):not(svg):not([class*="flag-icon"]):not([class*="feather"]):not([cl
   justify-content: center !important;
   inset: auto !important;
 }
-.auth-cover .auth-inner { padding-top: 0.5rem !important; }
-/* the heading sits right under the logo with just a little breathing room */
+/* The form column vertically-centered its content, which left a big empty gap
+   above the heading on the SHORT pages (login / 2FA / forgot) while the longer
+   registration form looked fine. Align the form column to the top so every auth
+   page reads the same: logo -> small gap -> heading -> form. */
+.auth-cover .auth-bg {
+  align-items: flex-start !important;
+  min-height: auto !important;
+}
 .auth-cover .card-title { margin-top: 0.25rem !important; }
 
-/* Card view (narrow screens): toggle / switch values were rendering centered.
-   Make their wrapper shrink to its content and align to the start so the pill
-   hugs the visual-left edge, matching the email / phone values above it. */
-table.assureit-cards td { align-items: center !important; }
+/* Card view (narrow screens): keep the toggle / switch values VISIBLE and let
+   them sit at the visual-left instead of centered. Do NOT touch their width —
+   forcing width:auto collapsed some switches and hid them entirely. */
 table.assureit-cards td:has(input[type="checkbox"]) { justify-content: space-between !important; }
 table.assureit-cards td .form-check,
 table.assureit-cards td .form-switch,
@@ -47,13 +49,7 @@ table.assureit-cards td .custom-control,
 table.assureit-cards td .custom-switch,
 table.assureit-cards td [class*="switch"],
 table.assureit-cards td [class*="toggle"] {
-  margin: 0 !important;
-  padding: 0 !important;
-  width: auto !important;
-  min-width: 0 !important;
-  min-height: 0 !important;
-  display: inline-flex !important;
-  align-items: center !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
   justify-content: flex-start !important;
-  text-align: left !important;
 }
