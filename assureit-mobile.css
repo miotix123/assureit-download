@@ -18,3 +18,42 @@ body *:not(i):not(svg):not([class*="flag-icon"]):not([class*="feather"]):not([cl
 .auth-cover [class*="col-lg-"].d-flex { flex: 0 0 100% !important; max-width: 100% !important; }
 .auth-wrapper .auth-inner { align-items: flex-start !important; min-height: auto !important; }
 .auth-wrapper { padding-bottom: 90px !important; }
+
+/* Auth pages: the brand logo is absolutely positioned (desktop layout), so on
+   mobile it landed ON TOP of the welcome heading. Put it back in normal flow on
+   its own centered line with a small gap, so the order reads:
+   logo -> small space -> heading/description -> form. */
+.auth-cover .brand-logo {
+  position: static !important;
+  width: 100% !important;
+  margin: 1.25rem 0 1.25rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  inset: auto !important;
+}
+.auth-cover .auth-inner { padding-top: 0.5rem !important; }
+/* the heading sits right under the logo with just a little breathing room */
+.auth-cover .card-title { margin-top: 0.25rem !important; }
+
+/* Card view (narrow screens): toggle / switch values were rendering centered.
+   Make their wrapper shrink to its content and align to the start so the pill
+   hugs the visual-left edge, matching the email / phone values above it. */
+table.assureit-cards td { align-items: center !important; }
+table.assureit-cards td:has(input[type="checkbox"]) { justify-content: space-between !important; }
+table.assureit-cards td .form-check,
+table.assureit-cards td .form-switch,
+table.assureit-cards td .custom-control,
+table.assureit-cards td .custom-switch,
+table.assureit-cards td [class*="switch"],
+table.assureit-cards td [class*="toggle"] {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: left !important;
+}
