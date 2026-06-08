@@ -3,10 +3,18 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap');
 
-/* Apply Heebo across the WHOLE UI including the nav / menu (the theme pins
-   Montserrat on those, so we override broadly). Icon elements are excluded so
-   icon fonts/SVGs are never touched. */
+/* Heebo across the WHOLE UI including the nav / menu (icons excluded). */
 body,
 body *:not(i):not(svg):not([class*="flag-icon"]):not([class*="feather"]):not([class*="fa-"]):not([class^="bi-"]):not([class*=" bi-"]) {
   font-family: 'Heebo', 'Segoe UI', Helvetica, Arial, sans-serif !important;
 }
+
+/* Auth pages (login / register / forgot / 2FA): the illustration column always
+   carries .d-lg-flex; the form column carries .d-flex. Hide the illustration
+   whatever its width, and let the form fill the screen. Removes the big image
+   and the empty gap on every auth page. */
+.auth-cover .img-fluid.img-gif { display: none !important; }
+.auth-cover [class*="col-lg-"].d-lg-flex { display: none !important; }
+.auth-cover [class*="col-lg-"].d-flex { flex: 0 0 100% !important; max-width: 100% !important; }
+.auth-wrapper .auth-inner { align-items: flex-start !important; min-height: auto !important; }
+.auth-wrapper { padding-bottom: 90px !important; }
