@@ -37,17 +37,11 @@ body *:not(i):not(svg):not([class*="flag-icon"]):not([class*="feather"]):not([cl
 }
 .auth-cover .card-title { margin-top: 0.25rem !important; }
 
-/* Card view (narrow screens): the toggle is a Vuexy icon-switch:
-     .form-check.form-switch.switch > input.form-check-input
-                                    > label > span.switch-icon-left  (check)
-                                            > span.switch-icon-right (x)
-   The check / x icons are absolutely positioned against the CONTAINER's right
-   edge, which only lines up with the track when the container is exactly the
-   track's width. In the card the container kept its desktop padding, so the
-   icons drifted OUTSIDE the pill. Fix: collapse the container to the 42px track
-   and re-anchor the two icons over it. (Do NOT use a broad [class*="switch"]
-   selector — it also matches the input class `ls_contact_switch` and the icon
-   spans, which breaks the track and hides it.) */
+/* Card view (narrow screens): the toggle is a Vuexy icon-switch
+   (.form-check.form-switch.switch). The check/x icons are absolutely positioned
+   against the CONTAINER's right edge, so collapse the container to the 42px
+   track and re-anchor the two icons over it. (Do NOT use a broad
+   [class*="switch"] selector — it also matches the input class and icon spans.) */
 table.assureit-cards td { align-items: center !important; }
 table.assureit-cards td:has(input[type="checkbox"]) { justify-content: space-between !important; }
 table.assureit-cards td .form-check.switch {
@@ -68,3 +62,11 @@ table.assureit-cards td .form-check.switch .form-check-input {
 table.assureit-cards td .form-check.switch .form-check-label { position: static !important; }
 table.assureit-cards td .form-check.switch .switch-icon-left  { left: auto !important; right: 6px !important;  transform: none !important; }
 table.assureit-cards td .form-check.switch .switch-icon-right { left: auto !important; right: 23px !important; transform: none !important; }
+
+/* The site's dark slide-out menu (Vuexy .main-menu) had its scroll container
+   set to overflow:hidden, so on a short (phone) screen a long menu was cut off
+   with no way to reach the lower items. Let it scroll. */
+.main-menu .main-menu-content {
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
