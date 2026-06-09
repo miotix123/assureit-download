@@ -63,10 +63,12 @@ table.assureit-cards td .form-check.switch .form-check-label { position: static 
 table.assureit-cards td .form-check.switch .switch-icon-left  { left: auto !important; right: 6px !important;  transform: none !important; }
 table.assureit-cards td .form-check.switch .switch-icon-right { left: auto !important; right: 23px !important; transform: none !important; }
 
-/* The site's dark slide-out menu (Vuexy .main-menu) had its scroll container
-   set to overflow:hidden, so on a short (phone) screen a long menu was cut off
-   with no way to reach the lower items. Let it scroll. */
-.main-menu .main-menu-content {
+/* The site's dark slide-out menu (Vuexy .main-menu, position:fixed) clipped a
+   long menu — overflow:hidden on the fixed container — so the lower items were
+   unreachable on a short (phone) screen. The scroll has to be on .main-menu
+   itself (its content overflows it); putting it on the inner .main-menu-content
+   does nothing because that element isn't height-capped. */
+.main-menu {
   overflow-y: auto !important;
   -webkit-overflow-scrolling: touch !important;
 }
