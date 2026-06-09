@@ -30,26 +30,41 @@ body *:not(i):not(svg):not([class*="flag-icon"]):not([class*="feather"]):not([cl
   inset: auto !important;
 }
 /* The form column vertically-centered its content, which left a big empty gap
-   above the heading on the SHORT pages (login / 2FA / forgot) while the longer
-   registration form looked fine. Align the form column to the top so every auth
-   page reads the same: logo -> small gap -> heading -> form. */
+   above the heading on the SHORT pages (login / 2FA / forgot). Align to top. */
 .auth-cover .auth-bg {
   align-items: flex-start !important;
   min-height: auto !important;
 }
 .auth-cover .card-title { margin-top: 0.25rem !important; }
 
-/* Card view (narrow screens): keep the toggle / switch values VISIBLE and let
-   them sit at the visual-left instead of centered. Do NOT touch their width —
-   forcing width:auto collapsed some switches and hid them entirely. */
+/* Card view (narrow screens): the toggle is a Vuexy icon-switch:
+     .form-check.form-switch.switch > input.form-check-input
+                                    > label > span.switch-icon-left  (check)
+                                            > span.switch-icon-right (x)
+   The check / x icons are absolutely positioned against the CONTAINER's right
+   edge, which only lines up with the track when the container is exactly the
+   track's width. In the card the container kept its desktop padding, so the
+   icons drifted OUTSIDE the pill. Fix: collapse the container to the 42px track
+   and re-anchor the two icons over it. (Do NOT use a broad [class*="switch"]
+   selector — it also matches the input class `ls_contact_switch` and the icon
+   spans, which breaks the track and hides it.) */
+table.assureit-cards td { align-items: center !important; }
 table.assureit-cards td:has(input[type="checkbox"]) { justify-content: space-between !important; }
-table.assureit-cards td .form-check,
-table.assureit-cards td .form-switch,
-table.assureit-cards td .custom-control,
-table.assureit-cards td .custom-switch,
-table.assureit-cards td [class*="switch"],
-table.assureit-cards td [class*="toggle"] {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  justify-content: flex-start !important;
+table.assureit-cards td .form-check.switch {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  width: 42px !important;
+  min-width: 42px !important;
+  max-width: 42px !important;
+  min-height: 24px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: 0 0 auto !important;
 }
+table.assureit-cards td .form-check.switch .form-check-input {
+  margin: 0 !important; position: static !important; float: none !important;
+}
+table.assureit-cards td .form-check.switch .form-check-label { position: static !important; }
+table.assureit-cards td .form-check.switch .switch-icon-left  { left: auto !important; right: 6px !important;  transform: none !important; }
+table.assureit-cards td .form-check.switch .switch-icon-right { left: auto !important; right: 23px !important; transform: none !important; }
